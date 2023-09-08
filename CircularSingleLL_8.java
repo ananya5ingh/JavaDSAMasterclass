@@ -4,22 +4,21 @@ class Node{
     public Node next;
 }
 
-class SinglyLLOperations{
-
-    public Node head;
-    public Node tail;
+class CircularSingleLLOperations{
+     
+    public Node head = new Node();
+    public Node tail = new Node();
     public int size;
 
     public Node creation(int nodeValue){
 
-        head = new Node(); // TC: O(1)
-        Node node = new Node(); // TC: O(1)
-        node.value = nodeValue; // TC: O(1)
-        node.next = null; // TC: O(1)
-        head = node; // TC: O(1)
-        tail = node; // TC: O(s1)
+        Node node = new Node();
+        node.value = nodeValue;
+        node.next = node;
+        head = node;
+        tail = node;
         size = 1;
-        return head; // TC: O(1)
+        return head;
     }
     // TC: O(1) // SC: O(1)
 
@@ -37,12 +36,13 @@ class SinglyLLOperations{
 
             node.next = head;
             head = node;
+            tail.next = head;
         }// TC: O(1)
         else if(location >= size){
 
-            node.next = null;
             tail.next = node;
             tail = node;
+            node.next = head;
         }// TC: O(1)
         else{
             Node tempNode = new Node(); // TC: O(1)
@@ -53,11 +53,9 @@ class SinglyLLOperations{
                 index++;
             }// TC: O(n)
 
-            // Node nextNode = tempNode.next; // TC: O(1)
-            // tempNode.next = node; // TC: O(1)
-            // node.next = nextNode; // TC: O(1)
-            node.next = tempNode.next;
-            tempNode.next = node;
+            Node nextNode = tempNode.next; // TC: O(1)
+            tempNode.next = node; // TC: O(1)
+            node.next = nextNode; // TC: O(1)
 
         }
         size++; // TC: O(1)
@@ -68,7 +66,7 @@ class SinglyLLOperations{
 
         if(head == null){
 
-            System.out.println("Single LL does not exist.");
+            System.out.println("CLL does not exist.");
         }// TC: O(1)
         else{
             Node tempNode = head; // TC: O(1)
@@ -103,24 +101,29 @@ class SinglyLLOperations{
 
     public void deletion(int location){
         if(head == null){
-            System.out.println("This SLL does not exist.\n");
+            System.out.println("This CLL does not exist.\n");
             return;
         } // TC: O(1)
         else if(location == 0){
             
             head = head.next;
+            tail.next = head;
             size--;
             if(size == 0){
                 tail = null;
+                head = null;
+
             }
         } // TC: O(1)
         else if(location >= size){
             Node tempNode = head;
-            for(int i=0; i<size-1; i++){ // loop until the node rigth before the last node
+            for(int i=0; i<size-1; i++){ // loop until the node right before the last node
                 tempNode = tempNode.next;
             }
             if(tempNode == head){ // if tempNode == head, it would mean head is the second to last therefore LL has only 1 element
-                tail = head = null; 
+
+                head.next = null;
+                tail = head = null;
                 size--;
                 return;
             }
@@ -135,44 +138,53 @@ class SinglyLLOperations{
             }
             tempNode.next = tempNode.next.next;
             size--;
-        } // TC: O(n)
-        
+        } // TC: O(n) 
     }
     // TC: O(n) // SC: O(1)
 
-    public void deleteSLL(){
-        head = null;
-        tail = null;
-        System.out.println("LinkedList deleted.");
+    public void deleteCLL(){
+        if(head == null){
+            System.out.println("CLL does not exist.");
+        }
+        else{
+            tail.next = null;
+            head = null;
+            tail = null;
+            System.out.println("LinkedList deleted.");
+        }
     }
+    // TC: O(1) // SC: O(1)
 
-}
+} 
 
-public class SinglyLL_7{
 
+public class CircularSingleLL_8 {
+    
     public static void main(String[] args){
 
-        SinglyLLOperations sLL = new SinglyLLOperations();
-        // System.out.println(sLL.creation(7));
-        // ^ shows reference
-        sLL.creation(7);
-        System.out.println(sLL.head.value);
+        CircularSingleLLOperations cLL = new CircularSingleLLOperations();
 
-        sLL.insertion(0, 11);
-        sLL.insertion(1, 22);
-        sLL.insertion(2, 33);
-        sLL.insertion(3, 44);
+        cLL.creation(5);
+        System.out.println(cLL.head.value);
+        System.out.println(cLL.head.next.value);
+        // ^ shows that it is a circular single LL 
 
-        sLL.traversal();
+        cLL.insertion(0, 11);
+        cLL.insertion(1, 22);
+        cLL.insertion(2, 33);
+        cLL.insertion(3, 44);
 
-        sLL.search(88);
+        cLL.traversal();
 
-        sLL.deletion(7);
-        sLL.traversal();
+        cLL.search(77);
 
-        sLL.deleteSLL();
-        sLL.traversal();
+        cLL.deletion(2);
 
+        cLL.traversal();
+
+        cLL.deleteCLL();
+
+        cLL.traversal();
     }
-
+    
 }
