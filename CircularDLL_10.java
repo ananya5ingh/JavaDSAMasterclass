@@ -7,8 +7,8 @@ class Node{
 
 class CircularDLLOperations{
 
-    public Node head = new Node();
-    public Node tail = new Node();
+    public Node head;// = new Node();
+    public Node tail;// = new Node();
     public int size;
 
     public Node creation(int nodeValue){
@@ -50,7 +50,7 @@ class CircularDLLOperations{
             tail = node;
         }// TC: O(1)
         else{
-            Node tempNode = new Node(); // TC: O(1)
+            Node tempNode;// = new Node(); // TC: O(1)
             tempNode = head;
             int index = 0; // TC: O(1)
             while(index<location-1){ 
@@ -93,7 +93,7 @@ class CircularDLLOperations{
             System.out.println("cdLL does not exist.");
         }// TC: O(1)
         else{
-            Node tempNode = new Node();
+            Node tempNode;// = new Node();
             tempNode = tail; // TC: O(1)
             for(int i=0; i<size; i++){ // TC: O(n)
                 System.out.print(tempNode.value);
@@ -125,13 +125,59 @@ class CircularDLLOperations{
     }
     // TC: O(n) // TC: O(1)
 
+    public void deleteNode(int location) {
+    if (head == null) {
+      System.out.println("The CDLL does not exist!");
+      return;
+    } else if (location == 0) {
+      if (size == 1) {
+        head.prev = null;
+        head.next = null;
+        head = tail = null;
+        size--;
+        return;
+      } else {
+        head = head.next;
+        head.prev = tail;
+        tail.next = head;
+        size--;
+      }
+    } else if (location >= size) {
+      if (size == 1) {
+        head.prev = null;
+        head.next = null;
+        head = tail = null;
+        size--;
+        return;
+      } else {
+        tail = tail.prev;
+        tail.next = head;
+        head.prev = tail;
+        size--;
+      }
+    } else {
+      Node tempNode = head;
+      for (int i = 0; i < location -1; i++){
+        tempNode = tempNode.next;
+      }
+      tempNode.next = tempNode.next.next;
+      tempNode.next.prev = tempNode;
+      size--;
+    }
+  } // TC: O(n) // SC: O(1)
 
-    
-
+  public void deleteCDLL() {
+    Node tempNode = head;
+    for (int i=0; i<size; i++) {
+      tempNode.prev = null;
+      tempNode = tempNode.next;
+    }
+    head = null;
+    tail = null;
+    System.out.println("The CDLL has been deleted!");
+  } // TC: O(n) // SC: O(1)
 
 }
-
-
 
 public class CircularDLL_10 {
     public static void main(String[] args){
@@ -152,5 +198,12 @@ public class CircularDLL_10 {
         cdLL.reverseTraversal();
 
         cdLL.search(22);
+
+        cdLL.deleteNode(2);
+        cdLL.traversal();
+
+        cdLL.deleteCDLL();
+        cdLL.traversal(); 
+
     }
 }

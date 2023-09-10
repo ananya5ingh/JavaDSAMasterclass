@@ -6,8 +6,8 @@ class Node{
 
 class SinglyLLOperations{
 
-    public Node head = new Node();
-    public Node tail = new Node();
+    public Node head; //= new Node();
+    public Node tail; // = new Node();
     public int size;
 
     public Node creation(int nodeValue){
@@ -44,7 +44,7 @@ class SinglyLLOperations{
             tail = node;
         }// TC: O(1)
         else{
-            Node tempNode = new Node(); // TC: O(1)
+            Node tempNode; //= new Node(); // TC: O(1)
             tempNode = head;
             int index = 0; // TC: O(1)
             while(index<location-1){ 

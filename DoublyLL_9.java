@@ -7,8 +7,8 @@ class Node{
 
 class DoublyLLOperations{
 
-    public Node head = new Node();
-    public Node tail = new Node();
+    public Node head;// = new Node();
+    public Node tail;// = new Node();
     int size;
 
     public Node creation(int nodeValue){
@@ -47,7 +47,7 @@ class DoublyLLOperations{
         }
         else{
 
-            Node tempNode = new Node();
+            Node tempNode;// = new Node();
             tempNode = head;
 
             for(int i=0; i<location-1; i++){
@@ -68,7 +68,7 @@ class DoublyLLOperations{
             System.out.println("DLL does not exist.");
         }// TC: O(1)
         else{
-            Node tempNode = new Node();
+            Node tempNode;// = new Node();
             tempNode = head; // TC: O(1)
             for(int i=0; i<size; i++){ // TC: O(n)
                 System.out.print(tempNode.value);
@@ -88,7 +88,7 @@ class DoublyLLOperations{
             System.out.println("DLL does not exist.");
         }// TC: O(1)
         else{
-            Node tempNode = new Node();
+            Node tempNode;// = new Node();
             tempNode = tail; // TC: O(1)
             for(int i=0; i<size; i++){ // TC: O(n)
                 System.out.print(tempNode.value);
@@ -162,7 +162,7 @@ class DoublyLLOperations{
 
     public void deleteDLL(){
         
-        Node tempNode = new Node();
+        Node tempNode;// = new Node();
         tempNode = head;
         for(int i=0; i<size; i++){
             tempNode.prev = null;
