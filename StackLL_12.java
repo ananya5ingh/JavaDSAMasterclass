@@ -55,7 +55,7 @@ class Stack{
         sLL.head = null;
         System.out.println("The stack has been deleted.");
     }
-    // TC: O(1) // SC: O(1)
+    // TC: O(1) // SC: O(1) 
 }
 
 
