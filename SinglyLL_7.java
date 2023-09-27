@@ -147,6 +147,7 @@ class SinglyLLOperations{
 
 }
 
+
 public class SinglyLL_7{
 
     public static void main(String[] args){
