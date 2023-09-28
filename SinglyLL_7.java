@@ -165,13 +165,13 @@ public class SinglyLL_7{
 
         sLL.traversal();
 
-        sLL.search(88);
+        // sLL.search(88);
 
         sLL.deletion(7);
         sLL.traversal();
 
-        sLL.deleteSLL();
-        sLL.traversal();
+        // sLL.deleteSLL();
+        // sLL.traversal();
 
     }
 
