@@ -118,7 +118,7 @@ class BinaryTreeLLOperations{
 
         Queue<BinaryNode> queue = new LinkedList<BinaryNode>();
         // ^creating queue using LL
-
+        
         if(root == null){
             root = newNode;
             System.out.println(valueToInsert+ " successfully inserted.\n");
@@ -131,19 +131,23 @@ class BinaryTreeLLOperations{
             while(!queue.isEmpty()){
                 BinaryNode presentNode = queue.remove(); // creating a node (presentNode) to save the first value of the queue
 
-                // in level oreder traversal we visit nodes of each level from left to right
+                // in level order traversal we visit nodes of each level from left to right
                 if(presentNode.left == null){ // if presentNode has a left child
 
                     presentNode.left = newNode;
                     System.out.println(valueToInsert+ " successfully inserted.\n");
                     return;
                 }
-                if(presentNode.right == null){ // if presentNode has a left child
+                else if(presentNode.right == null){ // if presentNode has a left child
 
                     presentNode.right = newNode;
                     System.out.println(valueToInsert+ " successfully inserted.\n");
                     return;
-                } 
+                }
+                else{ // when we don't have any vacant places in the left and right child
+                    queue.add(presentNode.left);
+                    queue.add(presentNode.right);
+                }
 
             }
         }
