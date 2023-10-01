@@ -214,11 +214,14 @@ public class BinaryTreeLL_18 {
         binaryTree.binaryTreeSearch("N10");
 
         binaryTree.insertBinaryNode("N10");
+        binaryTree.insertBinaryNode("N11");
 
         System.out.print("Level Order Traversal: ");
         binaryTree.levelOrderTraversal();
         System.out.println("\n");
 
         binaryTree.binaryTreeSearch("N10");
+
+        
     }
 }
