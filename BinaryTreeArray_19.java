@@ -71,6 +71,42 @@ class BinaryTree{
         }
     } // TC: O(n) // SC: O(1)
 
+    public int search(String value){
+
+        for(int i=1; i<= lastUsedIndex; i++){
+            if(arr[i] == value){
+                System.out.print("Value " +arr[i]+ " found at index "+ i+ "\n");
+                return i;
+            }            
+        }
+        System.out.println("Element not found.");
+        return -1;
+    } // TC: O(n) // SC: O(1)
+
+    public void delete(String value){
+
+        int location = search(value);
+        if(location == -1){
+            return;
+        }
+        else{
+            arr[location] = arr[lastUsedIndex]; // arr[location] is the node we want to delete
+            lastUsedIndex--;
+            System.out.printf("Node %s successfully deleted.\n", value);
+        }
+        
+    } // TC: O(n) // SC: O(1)
+
+    public void deleteBT(){
+        try{
+            arr = null;
+            System.out.println("Binary Tree has been successfully deleted.");
+        }
+        catch(Exception e){
+            System.out.println("There was an error deleting the tree.");
+        }
+    } // TC: O(1) // SC: O(1)
+
 }
 
 
@@ -100,6 +136,17 @@ public class BinaryTreeArray_19 {
 
         newBinaryTree.levelOrder();
         System.out.println();
+
+        newBinaryTree.search("N5");
+        newBinaryTree.search("N55");
+
+        newBinaryTree.delete("N4");
+
+        newBinaryTree.levelOrder();
+        System.out.println();
+
+        newBinaryTree.deleteBT();
+
         
     }
 }
