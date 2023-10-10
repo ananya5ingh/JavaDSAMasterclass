@@ -187,7 +187,7 @@ class AVL{
         } // TC: O(1)
         
         return node;
-    }
+    } 
     // TC: O(log n) // SC: O(log n)
      
 
@@ -195,7 +195,78 @@ class AVL{
         root = insertNode(root, value);
     }
 
+    // finding successor - helper method
+  public static BinaryNode minimumNode(BinaryNode root) {
+    if (root.left == null) {
+      return root;
+    } else {
+      return minimumNode(root.left);
+    }
+  } // TC: O(log n) // SC: O(log n)
+
+  // Delete node
+ public BinaryNode deleteNode(BinaryNode node, int value) {
+   if (node == null) {
+     System.out.println("Value not found in AVL");
+     return node;
+   }
+   if (value < node.value) {
+     node.left = deleteNode(node.left, value);
+   } else if (value > node.value) {
+     node.right = deleteNode(node.right, value);
+   } else {
+     if (node.left != null && node.right != null) {
+       BinaryNode temp = node;
+       BinaryNode minNodeForRight = minimumNode(temp.right);
+       node.value = minNodeForRight.value;
+       node.right = deleteNode(node.right, minNodeForRight.value);
+     } else if (node.left != null) {
+       node = node.left;
+     } else if (node.right != null) {
+       node = node.right;
+     } else {
+       node = null;
+     }
+   }
+   // Case 2 - rotation required
+
+   // System.out.println("1");
+   // System.out.println(previous.value);
+
+   // node.height = 1 + Math.max(getHeight(node.left), getHeight(node.right));
+   int balance = getBalance(node);
+
+   if (balance > 1 && getBalance(node.left) >= 0) {
+     return rotateRight(node);
+   }
+   if (balance > 1 && getBalance(node.left) < 0) {
+     node.left = rotateLeft(node.left);
+     return rotateRight(node);
+   }
+   if (balance < -1 && getBalance(node.right) <= 0) {
+     return rotateLeft(node);
+   }
+
+   if (balance < -1 && getBalance(node.right) > 0) {
+     node.right = rotateRight(node.right);
+     return rotateLeft(node);
+   }
+
+   return node;
+
+ } // TC: O(log n) // SC: O(log n)
+
+ public void delete(int value) {
+   root = deleteNode(root, value);
+ }
+
+ public void deleteAVLTree(){
+    root = null;
+    System.out.println("\nAVL has been successfully deleted.");
+ } 
+//  TC: O(1) // SC: O(1)
 }
+
 public class AVLTree_21 {
     
     public static void main(String[] args){
@@ -210,6 +281,15 @@ public class AVLTree_21 {
         // o/p for:
         // normal BST: 5 10 15 20
         // AVL Tree: 10 5 15 20
+
+        newAVL.delete(5);
+        System.out.println();
+        newAVL.levelOrderTraversal();
+
+        newAVL.deleteAVLTree();
+        
+
+
 
     }
 }
