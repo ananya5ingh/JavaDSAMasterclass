@@ -61,6 +61,16 @@ class DirectChaining{
             return false;
         }
     }
+
+    public void deleteKeyHashTable(String word){
+
+        int newIndex = modASCIIHashFunction(word, hashTable.length);
+        boolean result = searchHashTable(word);
+        if(result == true){
+            hashTable[newIndex].remove(word);
+            System.out.println("\n"+"\"" + word + "\"" + " has been deleted from HashTable"+newIndex);
+        }
+    }
 }
 
 public class DirectChaining_Hashing_24{
@@ -75,6 +85,8 @@ public class DirectChaining_Hashing_24{
         directChaining.insertHashTable("fox");
         directChaining.insertHashTable("over");
         // directChaining.displayHashTable();
-        directChaining.searchHashTable("fox");
+        // directChaining.searchHashTable("fox");
+        directChaining.deleteKeyHashTable("fox");
+        directChaining.displayHashTable();
     }
 }
